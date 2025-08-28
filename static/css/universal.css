@@ -1,0 +1,12 @@
+.title {
+    flex-shrink: 1;
+    margin: 0;
+
+    font-family: "Verdana", sans-serif;
+    font-size: 35px;
+}
+
+.instruction {
+    font-family: "FreeMono", monospace;
+    font-size: 18px;
+}
