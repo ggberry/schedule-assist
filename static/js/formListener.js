@@ -9,26 +9,17 @@ function addFormListener(form, path) {
                 body: formData,
             }).then(() => {
                 form.reset();
+                window.location.reload();
             });
         }
     );
 }
 
-function addRemoveListener(form, path) {
-    form.addEventListener('submit',
-        function(event) {
-            event.preventDefault();
-
-            fetch(path, {
-                method: 'POST',
-                body: "HI!",
-            })
-        }
-    );
-}
-
 const classInputForm = document.getElementById("class-input-form");
-const classDisplayForm = document.getElementById("class-remove-form");
+const removeForms = document.querySelectorAll(".class-remove-form");
 
 addFormListener(classInputForm, "/add-class");
-addRemoveListener(classDisplayForm, "/remove-class");
+
+removeForms.forEach(form => {
+    addFormListener(form, "/remove-class");
+});

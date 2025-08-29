@@ -1,4 +1,4 @@
-from flask import Blueprint, request, session, render_template, url_for
+from flask import Blueprint, request, session, render_template, jsonify
 
 index_page = Blueprint('login_page', __name__)
 
@@ -13,25 +13,32 @@ def index():
 
 @index_page.route('/add-class', methods=['POST'])
 def add_class():
-    if request.method == 'POST':
-        form_input = request.form.get("class-input-box")
-        classes = session.get("classes", dict())
+    form_input = request.form.get("class-input-box")
+    classes = session.get("classes", dict())
 
-        if len(classes.keys()) == 0:
-            classes["0"] = form_input
-        else:
-            new_id = max([int(key) for key in classes.keys()]) + 1
-            classes[str(new_id)] = form_input
+    if len(classes.keys()) == 0:
+        classes["0"] = form_input
+    else:
+        new_id = max([int(key) for key in classes.keys()]) + 1
+        classes[str(new_id)] = form_input
 
-        session["classes"] = classes
+    session["classes"] = classes
 
-    return url_for("login_page.index")
+    return '', 204
 
 @index_page.route('/remove-class', methods=['POST'])
 def remove_class():
-    if request.method == 'POST':
-        form_input = request.form.get("class-remove")
+    form_input = request.form.get("class-remove")
+    classes = session.get("classes", dict())
 
-        print(form_input)
+    del classes[form_input]
+    new_classes = dict()
 
-    return url_for("login_page.index")
+    index = 0
+    for _class in classes.values():
+        new_classes[index] = _class
+        index += 1
+
+    session["classes"] = new_classes
+
+    return '', 204
