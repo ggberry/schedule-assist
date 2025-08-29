@@ -17,10 +17,21 @@
 
     <div class="class-input-box">
         <span class="instruction">Enter your classes:</span>
-        <form method="post" action="/">
-            <input type="text" name="class-input" id="class-input" class="input-box" placeholder="123-AB4-CD">
+        <form method="post" id="class-input-form">
+            <input type="text" name="class-input-box" id="class-input" class="input-box" placeholder="123-AB4-CD">
             <input type="submit" value="Add">
         </form>
+
+        {% for id, class in classes.items() %}
+            <div class="class-display">
+                <span>{{ class }}</span>
+                <form method="post" id="class-remove-form">
+                    <input type="image" name="class-remove" value="e" alt="Remove" class="remove-img" src="{{ url_for('static', filename='images/remove.png') }}">
+                </form>
+            </div>
+        {% endfor %}
     </div>
+
+    <script src="{{ url_for('static', filename='js/formListener.js') }}"></script>
 </body>
 </html>

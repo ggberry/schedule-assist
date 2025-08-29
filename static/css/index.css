@@ -13,7 +13,6 @@ body {
     position: relative;
 
     width: 250px;
-    height: 100px;
     border-radius: 10px;
 
     background-color: rgb(145, 195, 250);
@@ -30,6 +29,20 @@ body {
     text-align: center;
 
     background-color: rgb(205, 230, 255)
+}
+
+.class-input-box .class-display {
+    display: flex;
+}
+
+.class-display span {
+    height: 25px;
+}
+
+.remove-img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
 }
 
 /* Top band */
